@@ -1,0 +1,41 @@
+@startuml
+class Combinada {
+- pizzas: List<Pizza>
++ Combinada(nombre: String): <<Create>>
++ agregarPizza(Pizza): void
++ calcularPrecio(): double
++ toString(): String
+}
+class PizzaLoca {
+- pizzas: List<Pizza>
++ PizzaLoca(): <<Create>>
++ agregarPizza(Pizza): void
++ mostrar(): void
+}
+
+class FactoryPizza {
++ getPizza(String): {static} Pizza
+}
+class Simple {
+- precio: double
+- esGrande: boolean
++ Simple(nombre: String,precio: double, esGrande: boolean): <<Create>>
++ calcularPrecio(): double
++ toString(): String
+}
+abstract class Pizza {
+- nombre: String
+- descripcion: String
++ Pizza(String): <<Create>>
++ getNombre(): String
++ calcularPrecio(): {abstract}double
+}
+
+
+Pizza <|-- Combinada
+Pizza "*" --* Combinada
+Pizza <|-- Simple
+PizzaLoca *-right- Pizza
+PizzaLoca --> FactoryPizza : uso
+
+@enduml
